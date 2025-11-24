@@ -6,13 +6,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Logger {
+class Logger {
     public enum LogLevel {DEBUG, INFO, WARNING, ERROR}
 
     private static final List<Logger> LOGGERS = new ArrayList<>();
     private final String name;
-    private LogLevel level = LogLevel.DEBUG;
-    private List<MessageHandler> handlers = new ArrayList<>();
+    private LogLevel level = LogLevel.DEBUG; // Уровень по умолчанию
+
+    // ✔ Новое: список обработчиков
+    private final List<MessageHandler> handlers = new ArrayList<>();
 
     private Logger(String name) {
         this.name = name;
@@ -41,7 +43,7 @@ public class Logger {
         return newLogger;
     }
 
-    // Добавление обработчика
+    // ✔ Новое: добавление обработчиков
     public void addHandler(MessageHandler handler) {
         handlers.add(handler);
     }
@@ -90,12 +92,15 @@ public class Logger {
     private void printMessage(LogLevel level, String message) {
         if (level.ordinal() >= this.level.ordinal()) {
             String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
-            String formattedMessage = MessageFormat.format("[{0}] {1} {2} - {3}",
+            String formatted = MessageFormat.format("[{0}] {1} {2} - {3}",
                     level, dateTime, name, message);
 
-            // Отправляем сообщение всем обработчикам
+            // ✔ старое поведение
+            System.out.println(formatted);
+
+            // ✔ новое поведение — передать обработчикам
             for (MessageHandler handler : handlers) {
-                handler.log(formattedMessage);
+                handler.handle(formatted);
             }
         }
     }
