@@ -4,27 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryHandler implements MessageHandler {
-    private int bufferSize;
-    private List<String> buffer = new ArrayList<>();
-    private MessageHandler targetHandler;
 
-    public MemoryHandler(MessageHandler targetHandler, int bufferSize) {
-        this.targetHandler = targetHandler;
-        this.bufferSize = bufferSize;
+    private final List<String> buffer = new ArrayList<>();
+    private final MessageHandler target;
+    private final int maxSize;
+
+    public MemoryHandler(MessageHandler target, int maxSize) {
+        this.target = target;
+        this.maxSize = maxSize;
     }
 
     @Override
-    public void log(String message) {
+    public void handle(String message) {
         buffer.add(message);
-        if (buffer.size() >= bufferSize) {
-            flush();
-        }
+        if (buffer.size() >= maxSize) flush();
     }
 
     public void flush() {
-        for (String msg : buffer) {
-            targetHandler.log(msg);
-        }
+        for (String m : buffer) target.handle(m);
         buffer.clear();
     }
 }
