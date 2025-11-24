@@ -13,7 +13,6 @@ class Logger {
     private final String name;
     private LogLevel level = LogLevel.DEBUG; // Уровень по умолчанию
 
-    // ✔ Новое: список обработчиков
     private final List<MessageHandler> handlers = new ArrayList<>();
 
     private Logger(String name) {
@@ -43,7 +42,6 @@ class Logger {
         return newLogger;
     }
 
-    // ✔ Новое: добавление обработчиков
     public void addHandler(MessageHandler handler) {
         handlers.add(handler);
     }
@@ -95,10 +93,8 @@ class Logger {
             String formatted = MessageFormat.format("[{0}] {1} {2} - {3}",
                     level, dateTime, name, message);
 
-            // ✔ старое поведение
             System.out.println(formatted);
 
-            // ✔ новое поведение — передать обработчикам
             for (MessageHandler handler : handlers) {
                 handler.handle(formatted);
             }
