@@ -98,9 +98,8 @@ public class Task01Main {
         Logger logger1 = Logger.getLogger("test");
         Logger logger2 = Logger.getLogger("test");
 
-        System.out.println(logger1 == logger2); // true
+        System.out.println(logger1 == logger2);
 
-        // Исправлено: LogLevel вместо Level
         logger1.setLevel(Logger.LogLevel.INFO);
 
         logger1.debug("This debug will not be printed");
