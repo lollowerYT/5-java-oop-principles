@@ -13,13 +13,14 @@ public class DiscountBill extends Bill{
     }
 
     // Метод получения итоговой суммы со скидкой
-    public long getTotalAmount() {
+    @Override
+    public long getPrice() {
         return (long) (super.getPrice() * (1 - discountPercentage / 100));
     }
 
     // Метод получения абсолютного значения скидки
     public long getDiscountAmount() {
-        return super.getPrice() - getTotalAmount();
+        return super.getPrice() - getPrice();
     }
 
     // Метод для строкового представления процента скидки
