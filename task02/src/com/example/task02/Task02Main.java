@@ -34,7 +34,7 @@ public class Task02Main {
         System.out.println("Исходная сумма: " + discountBill.getPrice());
         System.out.println("Процент скидки: " + ((DiscountBill) discountBill).getDiscount());
         System.out.println("Сумма скидки: " + ((DiscountBill) discountBill).getDiscountAmount());
-        System.out.println("Итоговая сумма со скидкой: " + ((DiscountBill) discountBill).getTotalAmount());
+        System.out.println("Итоговая сумма со скидкой: " + ((DiscountBill) discountBill).getPrice());
 
         // Выводим полный счет
         System.out.println("\nПолный счет:");
@@ -49,7 +49,7 @@ public class Task02Main {
         System.out.println("Исходная сумма: " + discountBill.getPrice());
         System.out.println("Процент скидки: " + ((DiscountBill) discountBill).getDiscount());
         System.out.println("Сумма скидки: " + ((DiscountBill) discountBill).getDiscountAmount());
-        System.out.println("Итоговая сумма со скидкой: " + ((DiscountBill) discountBill).getTotalAmount());
+        System.out.println("Итоговая сумма со скидкой: " + ((DiscountBill) discountBill).getPrice());
 
         // Выводим обновленный счет
         System.out.println("\nОбновленный счет:");
